@@ -1,0 +1,17 @@
+.pageHeader{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.notesPage{
+    display: flex;
+    justify-content: center;
+    
+}
+#noteHeader{
+    display: flex;
+        margin-top: 2rem;
+text-align: center;
+justify-content: center;
+}
