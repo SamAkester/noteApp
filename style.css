@@ -1,17 +1,27 @@
-.pageHeader{
+
+body{
     display: flex;
-    text-align: center;
     justify-content: center;
 }
 
-.notesPage{
+.notesCard{
     display: flex;
-    justify-content: center;
+    justify-content: center ;
+    
+    width: 20rem;
+    height: 20rem;
+    background-color: rgb(231, 218, 120);
     
 }
-#noteHeader{
-    display: flex;
-        margin-top: 2rem;
-text-align: center;
-justify-content: center;
+.notesForm{
+    display: block;
+  justify-content: center;
+  text-align: center;
+}
+#noteText{
+max-height:200px ;
+max-width: 200px;
+min-width: 20px;
+min-height: 20px;
+
 }
