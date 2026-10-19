@@ -9,7 +9,9 @@ body{
     justify-content: center ;
     
     width: 20rem;
-    height: 20rem;
+    height: auto;
+    min-height: 10rem;
+    max-height: 30rem;
     background-color: rgb(231, 218, 120);
     
 }
@@ -19,9 +21,34 @@ body{
   text-align: center;
 }
 #noteText{
-max-height:200px ;
 max-width: 200px;
 min-width: 20px;
 min-height: 20px;
 
 }
+.noteSection{
+    display: flex;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        column-gap: 0.01rem;
+        text-align: center;
+    
+
+}
+.deleteButton{
+    display: flex;
+    justify-content: center;
+            text-align: center;
+
+}
+
+.noteContainer{
+display: flex;
+justify-content: left;
+align-items: center;
+gap:10px;
+}
+
+
+
