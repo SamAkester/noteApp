@@ -7,11 +7,10 @@ body{
 .notesCard{
     display: flex;
     justify-content: center ;
-    
     width: 20rem;
     height: auto;
     min-height: 10rem;
-    max-height: 30rem;
+    /* max-height: 4%; */
     background-color: rgb(231, 218, 120);  
 }
 .notesForm{
@@ -23,6 +22,7 @@ body{
 max-width: 200px;
 min-width: 20px;
 min-height: 20px;
+max-height: 300px;
 }
 .noteSection{
     display: flex;
@@ -46,7 +46,6 @@ gap:10px;
 #noteButton{
     cursor: pointer;
     border: none;
-        background-color: rgb(255, 255, 255);
-
+    justify-content: left;
 }
 

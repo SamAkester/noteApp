@@ -1,4 +1,3 @@
-
 const noteText = document.getElementById("noteText");
 const newNote = document.querySelector(".noteSection");
 const noteTitle = document.getElementById("noteHeader");
@@ -6,7 +5,7 @@ const saveButton = document.getElementById("noteButton");
 let createButton;
 const createdButtons = [];
 
-
+//edit title
 noteTitle.addEventListener("dblclick", function (){
 let newTitle = document.createElement("input");
 noteTitle.replaceWith(newTitle);
@@ -16,10 +15,21 @@ newTitle.addEventListener("keydown", function(e){
 noteTitle.textContent = newTitle.value;
 newTitle.replaceWith(noteTitle);
     }
+});
+});
+//double click to delete note
+function deleteNote(saveNote ,noteContainer){
+    saveNote.addEventListener("dblclick" , function(){
+        createButton = document.createElement("button");
+noteContainer.appendChild(createButton);
 
+createButton.textContent = "Delete";
+createButton.classList.add("createButton");
+createButton.addEventListener("click", function (){
+noteContainer.remove();
 });
-console.log("click")
-});
+    });
+};
 
 saveButton.addEventListener("click", function (event,){
 event.preventDefault();
@@ -29,24 +39,21 @@ if (typedNote.trim() === ""){
     console.log("type note!")
 }else{
     console.log(createdButtons.length)
-createButton = document.createElement("button");
 const saveNote = document.createElement("p");
 const noteContainer = document.createElement("div");
 saveNote.textContent = typedNote;
-createButton.textContent = "Delete";
-createButton.classList.add("createButton");
-createButton.addEventListener("click", function (){
-noteContainer.remove();
-});
+deleteNote(saveNote, noteContainer);
 noteContainer.classList.add("noteContainer")
 noteContainer.appendChild(saveNote);
-noteContainer.appendChild(createButton);
 newNote.appendChild(noteContainer); 
 noteText.value = "";
 createdButtons.push(createButton);
 
 console.log(typedNote)
 }});
+
+
+
 
 
 // createButton.addEventListener("click", function (noteContainer){
