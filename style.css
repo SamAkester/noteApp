@@ -11,7 +11,7 @@ body{
     height: auto;
     min-height: 10rem;
     /* max-height: 4%; */
-    background-color: rgb(231, 218, 120);  
+    background-color: rgb(234, 234, 233);  
 }
 .notesForm{
     display: block;
