@@ -1,27 +1,27 @@
 
-
 const noteText = document.getElementById("noteText");
 const newNote = document.querySelector(".noteSection");
 const noteTitle = document.getElementById("noteHeader");
 const saveButton = document.getElementById("noteButton");
-let createButton;
 const createdButtons = [];
 
 
-function editNote(saveNote, enter){
-    
+
+function editNote(saveNote){
 saveNote.addEventListener("dblclick" , function(){
 saveNote.contentEditable = true;
         saveNote.focus();
+        completeNoteEdit(saveNote);
 
-    saveNote.addEventListener("keydown", function(e){
-if (e.key === "Enter"){
-    e.preventDefault();
-    saveNote.contentEditable = false;
-}})
 })};
 
-
+function completeNoteEdit(saveNote){
+    saveNote.addEventListener("keydown" ,function(e){
+        if (e.key === "Enter"){
+saveNote.contentEditable = false;
+        }
+    });
+}
 //edit title
 noteTitle.addEventListener("dblclick", function (e){
     noteTitle.contentEditable = true;
@@ -42,13 +42,30 @@ function deleteNote(saveNote ,noteContainer){
     saveNote.addEventListener("dblclick" , function(){
            if (noteContainer.querySelector(".createButton")){
 return; } 
-
-createButton = document.createElement("button");
+const createButton = document.createElement("button");
 noteContainer.appendChild(createButton)
 createButton.textContent = "Delete";
 createButton.classList.add("createButton");
+
+const deleteNoteFromServer = async (id, noteContainer) => {
+    try {
+        const response = await fetch(`http://localhost:3000/notes/${id}`,{
+            method:"DELETE",
+
+        })
+        if (response.ok){
+            noteContainer.remove();
+
+        }else{
+            console.error("failed to delete note. Status:", response.status);
+        }
+    } catch (error){
+        console.error(`error deleting note:`, error);
+    }
+}
+
 createButton.addEventListener("click", function (){
-noteContainer.remove();
+deleteNoteFromServer(noteContainer.dataset.id, noteContainer);
 });
     });
 };
@@ -62,14 +79,15 @@ const typedNote = noteText.value;
 if (typedNote.trim() === ""){
     console.log("type note!")
 }else{
-    console.log(createdButtons.length)
 const saveNote = document.createElement("p");
 const noteContainer = document.createElement("div");
 saveNote.textContent = typedNote;
 deleteNote(saveNote, noteContainer);
 noteContainer.classList.add("noteContainer")
 noteContainer.appendChild(saveNote);
+
 newNote.appendChild(noteContainer); 
+console.log(newNote.innerHTML)
 noteText.value = "";
 editNote(saveNote);
 
@@ -85,24 +103,33 @@ fetch("http://localhost:3000/notes",{
 .then(response => response.json())
 .then(data => {
     console.log(data.message);
+    noteContainer.dataset.id = data.id
+
 })
 .catch(error => {
     console.log("error sending note", error);
 });
-
 };
-console.log(typedNote)
 };
 saveButton.addEventListener("click", saveNoteFunction);
 noteText.addEventListener("keydown",saveNoteFunction);
 
+// load saved notes when the page opens
+fetch("http://localhost:3000/notes")
+    .then(response => response.json())
+    .then(notes =>  {
+        notes.forEach(function(note){
+       
+const saveNote = document.createElement("p");
+const noteContainer = document.createElement("div");
+noteContainer.dataset.id = note.id;
+console.log(note.id);
+saveNote.textContent = note.content;
+deleteNote(saveNote, noteContainer);
+noteContainer.classList.add("noteContainer");
+noteContainer.appendChild(saveNote);
+newNote.appendChild(noteContainer);
+editNote(saveNote);
+        })
 
-
-
-
-
-// createButton.addEventListener("click", function (noteContainer){
-// noteContainer.remove();
-// });
-
-
+     });

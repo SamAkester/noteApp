@@ -11,7 +11,7 @@ body{
     height: auto;
     min-height: 10rem;
     /* max-height: 4%; */
-    background-color: rgb(234, 234, 233);  
+    background-color: rgba(248, 248, 248, 0);  
 }
 .notesForm{
     display: block;
@@ -36,12 +36,12 @@ max-height: 300px;
 display: flex;
 justify-content: left;
 align-items: center;
-gap:10px;
+gap:5px;
 }
 .createButton{
     border: none;
     cursor: pointer;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(243, 243, 243);
 }
 #noteButton{
     cursor: pointer;
